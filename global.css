@@ -1,0 +1,39 @@
+body {
+  margin: 0;
+  line-height: normal;
+}
+
+a{
+  color: inherit;
+}
+
+:root {
+  /* fonts */
+  --font-inter: Inter;
+  --font-roboto: Roboto;
+
+  /* font sizes */
+  --font-size-mini: 15px;
+  --font-size-6xl: 25px;
+  --font-size-21xl: 40px;
+  --font-size-base: 16px;
+  --font-size-xl: 20px;
+  --font-size-7xl: 26px;
+
+  /* Colors */
+  --color-white: #fff;
+  --color-black: #000;
+  --color-firebrick-100: #c9453b;
+  --color-firebrick-200: rgba(201, 69, 59, 0);
+  --color-firebrick-300: rgba(201, 69, 59, 0.56);
+  --color-gray-100: rgba(0, 0, 0, 0.1);
+  --color-gray-200: rgba(0, 0, 0, 0.3);
+
+  /* border radiuses */
+  --br-31xl: 50px;
+  --br-xl: 20px;
+  --br-8xs: 5px;
+  --br-6xl: 25px;
+  --br-3xs: 10px;
+  --br-mini: 15px;
+}
