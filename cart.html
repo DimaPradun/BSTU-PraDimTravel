@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <link rel="stylesheet" href="./global.css" />
+    <link rel="stylesheet" href="./index.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Gelasio:wght@400;500;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap"
+    />
+  </head>
+  <body>
+    <div class="laptop-1" id="second">
+        <div class="slogan">
+            <div class="slogan">
+              <img
+                class="sloganbg-child"
+                alt=""
+                src="./assets/png/rectangle-31@2x.png"
+              />
+    
+              <div class="sloganbg-item"></div>
+            </div>
+            <div class="learnbtn">
+              <div class="learnbtn-child">Узнать больше</div>
+            </div>
+            <div class="text-slogan">
+              <div class="div1">
+                Для каждого из нас путешествия были на первом месте. И Мы хотим
+                предложить вам отдых от которого Вы отдохнете не только телом, но и
+                душой.
+              </div>
+              <b class="b">Как прекрасен этот мир, посмотри!</b>
+            </div>
+    </div>
+    <div class="header">
+        <nav class="menu">
+        
+          <input id="menu-toggle" type="checkbox">
+          <label class="menu-btn" for="menu-toggle">
+            <span></span>
+          </label>
+  
+          <ul class="menu__box">
+            <li><a class="menu__item" href="index.html">Главная</a></li>
+            <li><a class="menu__item" href="index.html">Страны</a></li>
+            <li><a class="menu__item" href="index.html">Туры</a></li>
+            <li><a class="menu__item" href="#">Бронирование</a></li>
+          </ul>
+        </nav>
+        <div class="links">
+          <a href="index.html"><div class="div2">Главная</div></a>
+          <a href="index.html"><div class="div3">Страны</div></a>
+          <a href="index.html"><div class="div4">Туры</div></a>
+          <a href="index.html"><div class="div5">Контакты</div></a>
+          <a href="#">
+          <div class="bookbtn">
+            <div class="bookbtn-child">Бронирование</div>
+          </div>
+          </a>
+        </div>
+        <a href="index.html">
+        <div class="logo">
+          <img class="image-49-icon" alt="" src="./assets/png/image-49@2x.png" />
+
+          <div class="div7">ПраДимТрэвел</div>
+        </div>
+        </a>
+      </div>
+      <div class="cart">
+        <h1>Корзина</h1>
+        <form>
+        <label for="products">Выберите тур:</label>
+        <br>
+        <select id="products">
+            <option value="">--Выберите тур--</option>
+            <option value="Турция" data-price="100">Турция 100 рублей за ночь</option>
+            <option value="Италия" data-price="200">Италия 200 рублей за ночь</option>
+            <option value="Франция" data-price="300">Франция 300 рублей за ночь</option>
+        </select>
+        <br>
+        <label for="quantity">Количество ночей:</label>
+        <br>
+        <input type="number" id="quantity" min="1" max="10">
+        <br>
+        <button type="button" id="add-to-cart" class="toursbtn-child">Добавить в корзину</button>
+        </form>
+        <ul id="cart"></ul>
+        <p id="total"></p>
+        <button onclick="finish()" class="toursbtn-child">Оформить заказ</и>
+    </div>
+    <script>
+        // Находим элементы HTML:
+        const productsSelect = document.getElementById('products');
+        const quantityInput = document.getElementById('quantity');
+        const addToCartButton = document.getElementById('add-to-cart');
+        const cartList = document.getElementById('cart');
+        const total = document.getElementById('total');
+
+        // Объявляем объект корзины:
+        const cart = {
+        items: [],
+        
+        // Метод для добавления товара в корзину:
+        addItem(item) {
+            this.items.push(item);
+        },
+        
+        // Метод для подсчета общей стоимости товаров в корзине:
+        getTotal() {
+            return this.items.reduce((total, item) => {
+            return total + (item.price * item.quantity);
+            }, 0);
+        },
+        
+        // Метод для отображения корзины:
+        render() {
+            cartList.innerHTML = '';
+            this.items.forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = `${item.quantity} ночей ${item.product} - ${item.price * item.quantity} руб.`;
+            cartList.appendChild(li);
+            });
+            
+            total.textContent = `Общая стоимость: ${this.getTotal()} руб.`;
+        }
+        };
+
+        // Обработчик события клика на кнопку "Добавить в корзину":
+        addToCartButton.addEventListener('click', () => {
+        const product = productsSelect.value;
+        const quantity = quantityInput.value;
+        
+        if (product && quantity) {
+            const price = parseFloat(productsSelect.options[productsSelect.selectedIndex].getAttribute('data-price'));
+            
+            // Создаем объект товара и добавляем его в корзину:
+            const item = { product, quantity, price };
+            cart.addItem(item);
+            
+            // Отображаем корзину:
+            cart.render();
+            
+            // Очищаем поля выбора товара и ввода количества:
+            productsSelect.value = '';
+            quantityInput.value = '';
+        }
+        });
+
+        function finish(){
+            alert('Заказ успешно оформлен!');
+            location.reload();
+        }
+    </script>
+</body>
+</html>
